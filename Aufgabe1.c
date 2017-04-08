@@ -20,7 +20,7 @@ typedef enum {
 } Test;
 
 typedef struct {
-	unsigned short int Case;
+	unsigned short int testCase;
 	unsigned short int expected;
 	char name[50];
 } TestCaseHighLow;
@@ -49,7 +49,7 @@ short int switchLowHighByte(short int i) {
 	return (part1 | part2);
 }
 
-//-------Test zu Aufgabe1------------------------------
+//-------Test zu Teil1------------------------------
 /*
  * runTestHighLow initialisiert den Testlauf
  * @param *test Zeiger auf Liste mit Testfällen.
@@ -61,9 +61,9 @@ void runTestHighLow(int lenght, TestCaseHighLow *test) {
 	int fail = 0;
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i + 1), test[i].name);
-		printf("\tInput: %#x; Expected-Output: %#x; ", test[i].Case,
+		printf("\tInput: %#x; Expected-Output: %#x; ", test[i].testCase,
 				test[i].expected);
-		t = testHighLow(test[i].Case, test[i].expected);
+		t = testHighLow(test[i].testCase, test[i].expected);
 		if (OK == t) {
 			printf("\tOK \n");
 			ok++;
@@ -115,7 +115,7 @@ void deserialize(unsigned short int data, Status* s, Numbers* n) {
 	*s = data & 0xff;
 	*n = data >> 8;
 }
-//-----------------------Test2------------------------------------
+//-----------------------Test zu Teil 2------------------------------------
 /*
  * runTestHighLow initialisiert den Testlauf
  * @param *test Zeiger auf Liste mit Testfällen.
