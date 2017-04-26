@@ -61,7 +61,7 @@ void runTestHighLow(int lenght, TestCaseHighLow *test) {
 	int fail = 0;
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i + 1), test[i].name);
-		printf("\tInput: %#x; Expected-Output: %#x; ", test[i].testCase,
+		printf("\tInput: '%#x', Expected-Output: '%#x', ", test[i].testCase,
 				test[i].expected);
 		t = testHighLow(test[i].testCase, test[i].expected);
 		if (OK == t) {
@@ -85,7 +85,7 @@ void runTestHighLow(int lenght, TestCaseHighLow *test) {
 Test testHighLow(unsigned short int input, unsigned short int expected) {
 	Test t;
 	unsigned short int soultion = switchLowHighByte(input);
-	printf("Output: %#x\n", soultion);
+	printf("Output: '%#x'\n", soultion);
 	if (soultion == expected) {
 		t = OK;
 	} else {
@@ -125,10 +125,12 @@ void runTestSD(int lenght, TestCaseSD *test) {
 	Test t;
 	int ok = 0;
 	int fail = 0;
+
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i + 1), test[i].name);
-		printf("\tNumbers: %#x; Status: %#x; Expected-Code: %#x \n", test[i].number, test[i].status, test[i].code);
+		printf("\tNumbers: '%#x', Status: '%#x', Expected-Code: '%#x' \n", test[i].number, test[i].status, test[i].code);
 		t = testSD(test[i].number, test[i].status, test[i].code);
+
 		if (OK == t) {
 			printf("\tOK \n");
 			ok++;
@@ -153,9 +155,11 @@ Test testSD(Numbers number, Status status, unsigned short int code) {
 	Numbers newNumber;
 	Status newStatus;
 	unsigned short int packet;
+
 	serialize(status, number, &packet);
 	deserialize(packet, &newStatus, &newNumber);
-	printf("\tOutput: %#x Calc-Number: %#x Calc-Status: %#x\n", packet, newNumber, newStatus);
+
+	printf("\tOutput: '%#x', Calc-Number: '%#x', Calc-Status: '%#x'\n", packet, newNumber, newStatus);
 	if ((number == newNumber) && (status == newStatus) && (code == packet)) {
 		t = OK;
 	} else {

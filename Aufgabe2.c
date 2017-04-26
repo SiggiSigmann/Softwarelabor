@@ -37,6 +37,7 @@ Test testFuntion3(char* input, char* pattern, char* expected);
  */
 char* extract(char* input) {
 	char* last;
+
 	for (; *input != '\0'; input++) {
 		if (*input == ':') {
 			if (*(input + 1) == ':') {
@@ -45,6 +46,7 @@ char* extract(char* input) {
 		}
 	}
 	last++;
+
 	return last;
 }
 
@@ -59,10 +61,12 @@ void runTest1(int lenght, TestCase1 *test) {
 	Test t;
 	int ok=0;
 	int fail=0;
+
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i+1), test[i].name);
-		printf("\tInput: %s; Expected-Output: %s; ", test[i].testCase,
+		printf("\tInput: '%s', Expected-Output: '%s', ", test[i].testCase,
 				test[i].expected);
+
 		t = testFuntion1(test[i].testCase, test[i].expected);
 		if (OK == t) {
 			printf("\tOK \n");
@@ -71,28 +75,33 @@ void runTest1(int lenght, TestCase1 *test) {
 			printf("\tFAIL \n");
 			fail++;
 		}
+
 		printf("\n");
 	}
-	printf("Result Tests: %i OK: %i Fails: %i\n",lenght,ok,fail);
+
+	printf("From %i Tests: OK: %i Fails: %i\n",lenght,ok,fail);
 }
 
 /*
- * testFuntion initialisiert den test und liefert das Ergebnis zurück.
+ * testFuntion1 initialisiert den test und liefert das Ergebnis zurück.
  * @param input Funktionsparameter.
  * @param expected erwartetes Ergebnis.
  * @return Ergebis des Tests.
  */
 Test testFuntion1(char* input, char* expected){
 	char* solution = extract(input);
-	printf("Output: %s\n", solution);
 	int same=1;
-	for(;expected=='\0';){
+
+	printf("Output: '%s'\n", solution);
+
+	for(;*expected!='\0';){
 		if(*expected!=*solution){
 			same=0;
 		}
 		expected++;
 		solution++;
 	}
+
 	if(same==1){
 		return OK;
 	}else{
@@ -123,10 +132,12 @@ void runTest2(int lenght, TestCase1 *test) {
 	Test t;
 	int ok=0;
 	int fail=0;
+
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i+1), test[i].name);
-		printf("\tInput: %s; Expected-Output: %s; ", test[i].testCase,
+		printf("\tInput: '%s', Expected-Output: '%s', ", test[i].testCase,
 				test[i].expected);
+
 		t = testFuntion2(test[i].testCase, test[i].expected);
 		if (OK == t) {
 			printf("\tOK \n");
@@ -137,11 +148,12 @@ void runTest2(int lenght, TestCase1 *test) {
 		}
 		printf("\n");
 	}
-	printf("Result Tests: %i OK: %i Fails: %i\n",lenght,ok,fail);
+
+	printf("From %i Tests: OK: %i Fails: %i\n",lenght,ok,fail);
 }
 
 /*
- * testFuntion initialisiert den test und liefert das Ergebnis zurück.
+ * testFuntion2 initialisiert den test und liefert das Ergebnis zurück.
  * @param input Funktionsparameter.
  * @param expected erwartetes Ergebnis.
  * @return Ergebis des Tests.
@@ -149,15 +161,18 @@ void runTest2(int lenght, TestCase1 *test) {
 Test testFuntion2(char* input, char* expected){
 	char* solution;
 	extract2(input, &solution);
-	printf("Output: %s\n", solution);
 	int same=1;
-	for(;expected=='\0';){
+
+	printf("Output: '%s'\n", solution);
+
+	for(;*expected!='\0';){
 		if(*expected!=*solution){
 			same=0;
 		}
 		expected++;
 		solution++;
 	}
+
 	if(same==1){
 		return OK;
 	}else{
@@ -171,17 +186,21 @@ Test testFuntion2(char* input, char* expected){
  * extract3 Findet das ende des Strings nach einem gewissen Strings.
  * @param *input Zeiger EingabeString.
  * @param **output Zeiger auf dem String Zeiger nach dem letzten ::.
+ * @return String nach dem letzten pattern.
  */
 char* extract3(char* input, char* pattern) {
 	char* last;
 	int same;
+
 	for (; *input != '\0'; input++) {
 		same=0;
+
 		for (int add = 0; *(pattern + add) != '\0'; add++) {
 			if(*(pattern + add)!=*(input + add)){
 				same++;
 			}
 		}
+
 		if(same==0){
 			last=input;
 			for (int add = 0; *(pattern + add) != '\0'; add++) {
@@ -203,10 +222,12 @@ void runTest3(int lenght, TestCase3 *test) {
 	Test t;
 	int ok=0;
 	int fail=0;
+
 	for (int i = 0; i < lenght; i++) {
 		printf("Test Nr.%i (%s): \n", (i+1), test[i].name);
-		printf("\tInput: %s; Expected-Output: %s; ", test[i].testCase,
+		printf("\tInput: '%s', Expected-Output: '%s', ", test[i].testCase,
 				test[i].expected);
+
 		t = testFuntion3(test[i].testCase, test[i].expected, test[i].pattern);
 		if (OK == t) {
 			printf("\tOK \n");
@@ -215,28 +236,32 @@ void runTest3(int lenght, TestCase3 *test) {
 			printf("\tFAIL \n");
 			fail++;
 		}
+
 		printf("\n");
 	}
-	printf("Result Tests: %i OK: %i Fails: %i\n",lenght,ok,fail);
+	printf("From %i Tests: OK: %i Fails: %i\n",lenght,ok,fail);
 }
 
 /*
- * testFuntion initialisiert den test und liefert das Ergebnis zurück.
+ * testFuntion3 initialisiert den test und liefert das Ergebnis zurück.
  * @param input Funktionsparameter.
  * @param expected erwartetes Ergebnis.
  * @return Ergebis des Tests.
  */
-Test testFuntion3(char* input, char* pattern, char* expected){
+Test testFuntion3(char* input, char* expected, char* pattern){
 	char* solution = extract3(input, pattern);
-	printf("Output: %s\n", solution);
 	int same=1;
-	for(;expected=='\0';){
+
+	printf("Output: '%s'\n", solution);
+
+	for(;*expected!='\0';){
 		if(*expected!=*solution){
 			same=0;
 		}
 		expected++;
 		solution++;
 	}
+
 	if(same==1){
 		return OK;
 	}else{
@@ -244,30 +269,46 @@ Test testFuntion3(char* input, char* pattern, char* expected){
 	}
 }
 
-
-
 int main(void) {
-	int number = 4;
 	printf("Teil 1:\n");
+
+	int number = 7;
 	TestCase1 test1[] = { { "Hal::lo", "lo" },
 						  { "::test", "test" },
 						  { "test::", "" },
-						  { "h::i", "i" } };
+						  { "Hal::lo::lo", "lo" },
+						  { "::test1::test2::test3", "test3" },
+						  { "test::huhu::", "" },
+						  { "h::i:", "i:" } };
 	runTest1(number, test1);
+
 	printf("----------------------------------- \n");
+	printf("\n");
+	printf("\n");
 	printf("Teil 2:\n");
-	TestCase1 test2[] = { { "Hal::lo", "loo" },
-						  { "::test", "test" },
-						  { "test::", "" },
-						  { "h::i", "i" } };
+
+	TestCase1 test2[] = { { "Hal::lo", "lo" },
+							  { "::test", "test" },
+							  { "test::", "" },
+							  { "Hal::lo::lo", "lo" },
+							  { "::test1::test2::test3", "test3" },
+							  { "test::huhu::", "" },
+							  { "h::i:", "i:" } };
 	runTest2(number, test2);
+
 	printf("----------------------------------- \n");
+	printf("\n");
+	printf("\n");
 	printf("Teil 3:\n");
-	int number3 = 4;
-	TestCase3 test3[] = { { "Hal::lo", "loo", "::"},
-						  { "Hallo", "Hao", "ll" },
-						  { "Ich 123123 Du", "Ich  Du", "123123" },
-						  { "Ha llo", "Hallo", " " } };
+
+	int number3 = 7;
+	TestCase3 test3[] = { { "Hal::lo", "lo", "::"},
+						  { "Hallo", "o", "ll" },
+						  { "Ich 123123 Du", " Du", "123123" },
+						  { "Hal::lo::lo::lo", "lo", "::"},
+						  { "Hallo", "o", "ll" },
+						  { "Ich 123123 Du123123Test", "Test", "123123" },
+						  { "Ha llo ", "", " " } };
 	runTest3(number3, test3);
 	return 0;
 }
